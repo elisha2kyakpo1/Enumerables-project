@@ -13,6 +13,7 @@ module Enumerable
       yield(arr[i])
       i += 1
     end
+    arr
   end
 
   # Create #my_each_with_index in the same way.
@@ -119,6 +120,8 @@ module Enumerable
 
   # Create #my_inject
   def my_inject(*parameter)
+    raise LocalJumpError if !block_given? && parameter[0].nil? && parameter[1].nil?
+
     total = 0
     if block_given?
       parameter = parameter[0]
@@ -130,7 +133,11 @@ module Enumerable
                 end
       end
     elsif parameter[1].nil?
-      my_each { |value| total = value.send parameter[0], total }
+      if parameter[0].is_a? Symbol
+        my_each_with_index { |value, index| total = value.send parameter[0], (index.zero? ? value : total) }
+      else
+        my_each { |value| total = value.send parameter[0], total }
+      end
     else
       my_each_with_index { |value, index| total = value.send parameter[1], (index.zero? ? parameter[0] : total) }
     end
