@@ -5,7 +5,7 @@ module Enumerable
   # You'll need to remember the yield statement.
   # Make sure it returns the same thing as #each as well.
   def my_each
-    return Enumerator.new(arr) unless block_given?
+    return to_enum unless block_given?
 
     arr = to_a
     i = 0
@@ -18,7 +18,7 @@ module Enumerable
 
   # Create #my_each_with_index in the same way.
   def my_each_with_index
-    return Enumerator.new(arr) unless block_given?
+    return to_enum unless block_given?
 
     index = 0
     my_each do |value|
@@ -38,19 +38,20 @@ module Enumerable
   end
 
   # Create #my_all? (continue as above)
-  def my_all?(parameter)
-    #return 'No block given' unless block_given?
-
+  def my_all?(parameter = nil)
     result = true
-    my_each do |value|
-      if block_given?
-        return false unless yield(value)
+    if block_given?
+      my_each { |value| return false unless yield(value) }
+    else
+      case parameter
+      when nil
+        my_each { |value| return false if value.nil? || !value }
+      when Regexp
+        my_each { |value| return false unless value =~ parameter }
+      when Class
+        my_each { |value| return false unless value.is_a? parameter }
       else
-        if parameter.is_a? Class
-          return false unless value.is_a? parameter
-        else
-          return false unless value =~ parameter
-        end
+        my_each { |value| return false unless value == parameter }
       end
     end
     result
