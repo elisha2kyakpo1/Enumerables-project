@@ -13,7 +13,8 @@ module Enumerable
       yield(arr[i])
       i += 1
     end
-    arr
+
+    arr != to_a ? arr : self
   end
 
   # Create #my_each_with_index in the same way.
