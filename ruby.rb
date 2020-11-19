@@ -4,11 +4,15 @@ module Enumerable
   # You'll need to remember the yield statement.
   # Make sure it returns the same thing as #each as well.
   def my_each
-    return 'No block given' unless block_given?
+    return Enumerator.new(arr) unless block_given?
 
-    for value in self do
-      yield(value)
+    arr = to_a
+    i = 0
+    while i < arr.length
+      yield(arr[i])
+      i += 1
     end
+    arr
   end
 
   # Create #my_each_with_index in the same way.
