@@ -17,10 +17,10 @@ module Enumerable
 
   # Create #my_each_with_index in the same way.
   def my_each_with_index
-    return 'No block given' unless block_given?
+    return Enumerator.new(arr) unless block_given?
 
     index = 0
-    for value in self do
+    my_each do |value|
       yield(value, index)
       index += 1
     end
