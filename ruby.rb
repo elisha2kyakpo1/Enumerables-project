@@ -27,13 +27,16 @@ module Enumerable
   end
 
   # Create #my_select in the same way, though you may use #my_each in your definition (but not #each).
-  def my_select
-    return 'No block given' unless block_given?
-
+  def my_select(parameter = nil)
     arr = []
-    my_each do |value|
-      arr.push(value) if yield(value)
+    if block_given?
+      my_each { |value| arr.push(value) if yield(value) }
+    elsif parameter.nil?
+      return Enumerator.new(arr)
+    else
+      my_each { |value| arr.push(value) if parameter.call(value) }
     end
+    arr
   end
 
   # Create #my_all? (continue as above)
@@ -57,65 +60,81 @@ module Enumerable
   end
 
   # Create #my_any?
-  def my_any?
-    return 'No block given' unless block_given?
-
+  def my_any?(parameter = nil)
     result = false
-    my_each do |value|
-      return true if yield(value)
+    if block_given?
+      my_each { |value| return true if yield(value) }
+    else
+      case parameter
+      when nil
+        my_each { |value| return true unless value.nil? || !value }
+      when Regexp
+        my_each { |value| return true if value =~ parameter }
+      when Class
+        my_each { |value| return true if value.is_a? parameter }
+      else
+        my_each { |value| return true if value == parameter }
+      end
     end
     result
   end
 
   # Create #my_none?
-  def my_none?
-    return 'No block given' unless block_given?
-
+  def my_none?(parameter = nil)
     result = true
-    my_each do |value|
-      return false if yield(value)
+    if block_given?
+      my_each { |value| return false if yield(value) }
+    else
+      case parameter
+      when nil
+        my_each { |value| return false unless value.nil? || !value }
+      when Regexp
+        my_each { |value| return false if value =~ parameter }
+      when Class
+        my_each { |value| return false if value.is_a? parameter }
+      else
+        my_each { |value| return false if value == parameter }
+      end
     end
     result
   end
 
   # Create #my_count
-  def my_count
+  def my_count(parameter = nil)
     count = 0
-    my_each do
-      count += 1
+    if block_given?
+      my_each { |value| count += 1 if yield(value) }
+    else
+      case parameter
+      when nil
+        my_each { count += 1 }
+      when Proc
+        my_each { |value| count += 1 if parameter.call(value) }
+      else
+        my_each { |value| count += 1 if value == parameter }
+      end
     end
     count
   end
 
-  # Create #my_map
-  def my_map_old
-    return 'No block given' unless block_given?
-
-    arr = []
-    my_each do |value|
-      arr.push(yield(value))
-    end
-    arr
-  end
-
   # Create #my_inject
-  def my_inject(initial = 0)
-    return 'No block given' unless block_given?
-
-    total = initial
-    my_each do |x|
-      total = yield(total, x)
+  def my_inject(*parameter)
+    total = 0
+    if block_given?
+      parameter = parameter[0]
+      my_each_with_index do |value, index|
+        total = if !index.zero?
+                  yield(total, value)
+                else
+                  parameter.nil? ? value : yield(parameter, value)
+                end
+      end
+    elsif parameter[1].nil?
+      my_each { |value| total = value.send parameter[0], total }
+    else
+      my_each_with_index { |value, index| total = value.send parameter[1], (index.zero? ? parameter[0] : total) }
     end
     total
-  end
-
-  # Modify your #my_map method to take a proc instead.
-  def my_map_proc(proc)
-    arr = []
-    my_each do |value|
-      arr.push(proc.call(value))
-    end
-    arr
   end
 
   # Modify your #my_map method to take either a proc or a block.
@@ -125,10 +144,13 @@ module Enumerable
   # whether the proc or block will be run first.
   # So if both a proc and a block are given, only execute the proc.
   def my_map(proc = nil)
+    return to_enum unless block_given?
+
     arr = []
-    my_each do |value|
-      to_push = proc.nil? ? yield(value) : proc.call(value)
-      arr.push(to_push)
+    if !proc.nil?
+      my_each { |value| arr.push(proc.call(value)) }
+    else
+      my_each { |value| arr.push(yield(value)) }
     end
     arr
   end
