@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/ModuleLength
 # My module Enumerable
 module Enumerable
   # Create #my_each, a method that is identical to #each but (obviously) does not use #each.
@@ -132,6 +133,8 @@ module Enumerable
     arr
   end
 end
+
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/ModuleLength
 
 # Test your #my_inject by creating a method called #multiply_els which multiplies all
 # the elements of the array together by using #my_inject, e.g. multiply_els([2,4,5]) #=> 40
