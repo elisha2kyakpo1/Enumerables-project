@@ -130,7 +130,8 @@ module Enumerable
       end
     elsif parameter[1].nil?
       if parameter[0].is_a? Symbol
-        my_each_with_index { |value, index| total = index.zero? ? value : (value.send parameter[0], total) }      else
+        my_each_with_index { |value, index| total = index.zero? ? value : (value.send parameter[0], total) }
+      else
         my_each { |value| total = value.send parameter[0], total }
       end
     else
