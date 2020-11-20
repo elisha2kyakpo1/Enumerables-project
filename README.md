@@ -22,7 +22,7 @@ Getting Started
 To get a local copy of the repository please run the following commands on your terminal:
 
 $ cd <folder>
-$ git clone https://github.com/acushlakoncept/enumerable.git
+$ git clone https://github.com/elisha2kyakpo1/Enumerables-project.git
 
 ## Built With
 
