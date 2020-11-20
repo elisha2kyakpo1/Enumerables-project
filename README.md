@@ -1,34 +1,28 @@
 # Enumerables-project
 
-## About Assignment 
-Create a script file to house your methods and run it in IRB to test them later.
-Add your new methods onto the existing Enumerable module. Ruby makes this easy for you because any class or module can be added to without trouble ... just do something like:
+## Enumerable
 
- > module Enumerable
+In this project we recreated our own enumerable methods using Ruby this is our second Ruby project of the Microverse Remote Software Development Curriculum.
 
-    def my_each
-      # your code here
-    end
-  end
+__Below are a list of methods we had to recreate.__
 
+ - Enumerable Methods List:
+ - my_each
+ - my_each_with_index
+ - my_select
+ - my_all?
+ - my_any?
+ - my_none?
+ - my_count
+ - my_map
+ - my_inject
+ - multiply_els
 
-1.	Create #my_each, a method that is identical to 
-    #each but (obviously) does not use #each. You'll need to remember the yield statement. Make sure it returns the same thing as #each as well.
+Getting Started
+To get a local copy of the repository please run the following commands on your terminal:
 
-2. Create #my_each_with_index in the same way.
-
-3. Create #my_select in the same way, though you may  use #my_each in your definition (but not #each).
-
-4. Create #my_all? (continue as above)
-5. Create #my_any?
-6. Create #my_none?
-7. Create #my_count
-8. Create #my_map
-9. Create #my_inject
-
-10. Test your #my_inject by creating a method called #multiply_els which multiplies all the elements of the array together by using #my_inject, e.g. multiply_els([2,4,5]) #=> 40
-Modify your #my_map method to take a proc instead.
-Modify your #my_map method to take either a proc or a block. It won't be necessary to apply both a proc and a block in the same #my_map call since you could get the same effect by chaining together one #my_map call with the block and one with the proc. This approach is also clearer, since the user doesn't have to remember whether the proc or block will be run first. So if both a proc and a block are given, only execute the proc.
+$ cd <folder>
+$ git clone https://github.com/acushlakoncept/enumerable.git
 
 ## Built With
 
