@@ -127,11 +127,8 @@ module Enumerable
     if block_given?
       parameter = parameter[0]
       my_each_with_index do |value, index|
-        total = if !index.zero?
-                  yield(total, value)
-                else
-                  parameter.nil? ? value : yield(parameter, value)
-                end
+        param = parameter.nil? ? value : yield(parameter, value)
+        total = !index.zero? ? yield(total, value) : param
       end
     elsif parameter[1].nil?
       if parameter[0].is_a? Symbol
