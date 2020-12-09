@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# rubocop:disable Metrics/BlockLength
 require_relative '../ruby'
 
 describe Enumerable do
@@ -18,7 +15,7 @@ describe Enumerable do
 
   describe '#my_select' do
     it 'Returns an array which passed a given block test' do
-      expect([1, 2, 3].my_select { |x|  x < 3 }).to_not eq [1]
+      expect([1, 2, 3].my_select { |x| x < 3 }).to_not eq [1]
     end
   end
 
@@ -57,4 +54,3 @@ describe Enumerable do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
