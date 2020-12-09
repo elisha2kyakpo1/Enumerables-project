@@ -1,21 +1,44 @@
 require_relative '../ruby'
 
 describe Enumerable do
-  describe "#my_each" do
-    it "Performs a block of code if given and returns the passed enumerable" do
-      expect([1,2,3].my_each{ |x|  5*x }).to eq ([1,2,3])
+  describe '#my_each' do
+    it 'Performs a block of code if given and returns the passed enumerable' do
+      expect([1, 2, 3].my_each { |x| 5 * x }).to eq([1, 2, 3])
     end
   end
 
-  describe "#my_each_with_index" do
-    it "Performs a block of code if given and returns the passed enumerable" do
-      expect((0..9).my_each_with_index{ |x, y|  y*x }).to eq ((0..9))
+  describe '#my_each_with_index' do
+    it 'Performs a block of code if given and returns the passed enumerable' do
+      expect((0..9).my_each_with_index { |x, y| y * x }).to eq((0..9))
     end
   end
 
-  describe "#my_select" do
-    it "Returns an array which passed a given block test" do
-      expect([1,2,3].my_select{ |x|  x < 3 }).to_not eq ([1])
+  describe '#my_select' do
+    it 'Returns an array which passed a given block test' do
+      expect([1, 2, 3].my_select { |x|  x < 3 }).to_not eq [1]
+    end
+  end
+
+  describe '#my_all?' do
+    it 'Returns true if all elements pass a condition passed to a block' do
+      expect([1, 2, 3].my_all? { |x| x < 4 }).to eq true
+    end
+  end
+
+  describe '#my_any?' do
+    it 'Returns true if any of elements pass a condition passed to a block' do
+      expect([1, 2, 3].my_any? { |x| x < 2 }).to eq true
+    end
+  end
+  describe '#my_none?' do
+    it 'Returns true if none of the elements pass a condition in a block' do
+      expect([1, 2, 3].my_none? { |x| x > 4 }).to eq true
+    end
+  end
+
+  describe '#my_count' do
+    it 'Returns true if all elements pass a condition passed to a block' do
+      expect([1, 2, 3].my_all? { |x| x < 4 }).to eq true
     end
   end
 end
