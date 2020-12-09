@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/BlockLength
 require_relative '../ruby'
 
 describe Enumerable do
@@ -38,7 +41,20 @@ describe Enumerable do
 
   describe '#my_count' do
     it 'Returns true if all elements pass a condition passed to a block' do
-      expect([1, 2, 3].my_all? { |x| x < 4 }).to eq true
+      expect([1, 2, 30].my_count { |x| x < 4 }).to eq 2
+    end
+  end
+
+  describe '#my_inject' do
+    it 'Returns the sum of object enumerables' do
+      expect([1, 2, 30].my_inject(:+)).to eq 33
+    end
+  end
+
+  describe '#my_map' do
+    it 'Returns an array of tranformed elements' do
+      expect([1, 2, 30].my_map { |x| x * 4 }).to eq [4, 8, 120]
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
