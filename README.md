@@ -40,7 +40,7 @@ $ run rspec our_rspec_test.rb
 - GitHub: [@elisha2kyakpo1](https://github.com/elisha2kyakpo1)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/elisha-kyakopo-009aa3197/)
 
-👤 **Angel Barros**
+👤 **Wandji Bertrand**
 
 - GitHub: [@wandji20](https://github.com/wandji20)
 - LinkedIn: [@wandjibertrand]
