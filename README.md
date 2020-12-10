@@ -6,7 +6,7 @@
 
 In this project we created test for both positive and negative examples for previously created Enumerable methods
 
-**\_Below are a list of methods we made test for.**
+**Below are a list of methods we made test for**
 
 - my_each
 - my_each_with_index
@@ -19,13 +19,13 @@ In this project we created test for both positive and negative examples for prev
 - my_inject
 
 Getting Started
-To get a local copy of the repository please run the following commands on your terminal:
+To see test results please run the following commands on your terminal:
 
-$ cd <folder>
-$ git clone https://github.com/elisha2kyakpo1/Enumerables-project.git
-$ checkout to test-rspec-elisha/wandji
-$ cd <spec>
-$ run rspec our_rspec_test.rb
+- cd <folder_name>
+- git clone https://github.com/elisha2kyakpo1/Enumerables-project.git
+- git checkout test-rspec-elisha/wandji
+- cd spec
+- rspec our_rspec_test.rb
 
 ## Built With
 
@@ -43,7 +43,7 @@ $ run rspec our_rspec_test.rb
 👤 **Wandji Bertrand**
 
 - GitHub: [@wandji20](https://github.com/wandji20)
-- LinkedIn: [@wandjibertrand]
+- LinkedIn: [@wandjibertrand](https://twitter.com/wandjibertrand)
 
 ## 🤝 Contributing
 
