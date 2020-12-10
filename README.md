@@ -1,6 +1,6 @@
 # Testing Enumerables
 
-## RSspec
+## RSpec
 
 ![Screenshot](Screenshot_2020-12-10_19-08-44.png "Screenshot of mobile first site")
 
