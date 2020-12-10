@@ -1,8 +1,8 @@
 # Testing Enumerables
 
-![Screenshot](Screenshot_2020-12-10_19-08-44.png "Screenshot of mobile first site")
-
 ## RSspec
+
+![Screenshot](Screenshot_2020-12-10_19-08-44.png "Screenshot of mobile first site")
 
 In this project we created test for both positive and negative examples for previously created Enumerable methods
 
