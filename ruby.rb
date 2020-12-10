@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/ModuleLength
 # My module Enumerable
 module Enumerable
@@ -120,9 +118,7 @@ module Enumerable
 
   #  #my_inject
   def my_inject(*parameter)
-    if !block_given? && parameter[0].nil? && parameter[1].nil?
-      raise LocalJumpError
-    end
+    raise LocalJumpError if !block_given? && parameter[0].nil? && parameter[1].nil?
 
     total = 0
     if block_given?
